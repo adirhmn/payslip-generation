@@ -11,9 +11,6 @@
   <p align="center">
     Payslip Generation is a REST API designed to automate employee payroll processing. Through this API, administrators can manage attendance periods, track employee attendance, overtime, and reimbursements, and generate accurate payslips based on processed data.
     <br />
-    <a href="https://github.com/adirhmn/payslip-generation"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/adirhmn/payslip-generation/issues">Report Bug</a>
     ·
     <a href="https://github.com/adirhmn/payslip-generation/issues">Request Feature</a>
@@ -250,7 +247,7 @@ Install Docker by following the instructions for your operating system from [her
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-#### Running Unit Testing with Docker
+#### Running Unit Testing
 
 To run unit tests and view the coverage report, follow these steps:
 
@@ -296,7 +293,7 @@ To simplify API testing, you can use the provided Postman collection.
    If you don't have Postman installed, you can download it [here](https://www.postman.com/downloads/).
 
 2. **Import Collection:**
-   Download Payslip Generation API Postman collection [here](https://github.com/adirhmn/payslip-generation/blob/main/payslip_generation.postman_collection.json), and import it into Postman.
+   Download Payslip Generation API Postman collection [here](https://github.com/adirhmn/payslip-generation/blob/main/payslip_generation.postman_collection), and import it into Postman.
 
 3. **Set Environment Variables:**
 
