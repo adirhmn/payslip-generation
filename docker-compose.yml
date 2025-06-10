@@ -1,0 +1,41 @@
+version: "3.4"
+
+services:
+  db:
+    image: postgres:14
+    container_name: payslip_db_postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    networks:
+      - payslip_service_network
+    volumes:
+      - dbvol:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payslip_go_app
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    networks:
+      - payslip_service_network
+    ports:
+      - "${PORT}:${PORT}"
+
+networks:
+  payslip_service_network:
+    name: "payslip_service_network"
+
+volumes:
+  dbvol: {}

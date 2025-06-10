@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "03038901-7db3-4b11-a91f-72593e4ea2fa",
+		"name": "Payment Generation Slip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11731835"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}ping",
+					"host": [
+						"{{localhost}}ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"employee_20\",\r\n    \"password\":\"employee123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}login",
+					"host": [
+						"{{localhost}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}login",
+					"host": [
+						"{{localhost}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add attendance period",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"start_date\": \"2025-06-01\",\r\n  \"end_date\": \"2025-06-20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}admin/add-attendance-period",
+					"host": [
+						"{{localhost}}admin"
+					],
+					"path": [
+						"add-attendance-period"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "run payroll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"period_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}admin/run-payroll",
+					"host": [
+						"{{localhost}}admin"
+					],
+					"path": [
+						"run-payroll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get payslip summary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_admin}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}admin/get-payslip-summary/1",
+					"host": [
+						"{{localhost}}admin"
+					],
+					"path": [
+						"get-payslip-summary",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit attendance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_employee}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"date\": \"2025-06-06\",\r\n  \"period_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}employee/submit-attendance",
+					"host": [
+						"{{localhost}}employee"
+					],
+					"path": [
+						"submit-attendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit overtime",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_employee}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"date\": \"2025-06-02\",\r\n  \"period_id\": 1,\r\n  \"hours\": 3,\r\n  \"work_completed\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}employee/submit-overtime",
+					"host": [
+						"{{localhost}}employee"
+					],
+					"path": [
+						"submit-overtime"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit reimbursement",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_employee}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"period_id\": 1,\r\n  \"amount\": 600000,\r\n  \"description\": \"makan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}employee/submit-reimbursement",
+					"host": [
+						"{{localhost}}employee"
+					],
+					"path": [
+						"submit-reimbursement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate-payslips",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_employee}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}employee/generate-payslips",
+					"host": [
+						"{{localhost}}employee"
+					],
+					"path": [
+						"generate-payslips"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:8080/v1/",
+			"type": "string"
+		},
+		{
+			"key": "token_employee",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk2NDQ0ODMsImlhdCI6MTc0OTU1ODA4MywiaXNfYWRtaW4iOmZhbHNlLCJ1c2VyX2lkIjoyMX0.LFqse22qxhPgmE8hS0smBSrC3uYF4irGLI-R8sxfTydg",
+			"type": "string"
+		},
+		{
+			"key": "token_admin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk2NDQ0NzIsImlhdCI6MTc0OTU1ODA3MiwiaXNfYWRtaW4iOnRydWUsInVzZXJfaWQiOjF9.lNpjQR38ropgS9dEyQ_iDOLRJqdGSbxSVw7snFClsEJc",
+			"type": "string"
+		}
+	]
+}
